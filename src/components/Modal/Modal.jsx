@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
-import { Overlay, ModalWindow } from './Modal.style';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Overlay, ModalWindow } from "./Modal.style";
 
 class Modal extends Component {
   state = {};
 
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
+    window.addEventListener("keydown", this.handleKeyDown);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
+    window.removeEventListener("keydown", this.handleKeyDown);
   }
 
-  handleKeyDown = evt => {
-    if (evt.code === 'Escape') {
+  handleKeyDown = (evt) => {
+    if (evt.code === "Escape") {
       this.props.onClose(evt);
     }
   };
-  handleBackdropClick = evt => {
+  handleBackdropClick = (evt) => {
     if (evt.currentTarget === evt.target) {
       this.props.onClose(evt);
     }
@@ -33,3 +34,7 @@ class Modal extends Component {
   }
 }
 export default Modal;
+
+Modal.propTypes = {
+  onClick: PropTypes.func.isRequired,
+};

@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import PropTypes from "prop-types";
 
 import Modal from "../Modal/Modal";
 import { ImageGalleryCard, ImageGalleryImg } from "./ImageGalleryItem.style";
@@ -41,3 +42,7 @@ class ImageGalleryItem extends Component {
   }
 }
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+  images: PropTypes.array.isRequired,
+};
