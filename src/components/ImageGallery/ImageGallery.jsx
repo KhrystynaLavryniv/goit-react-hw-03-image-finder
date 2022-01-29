@@ -31,6 +31,14 @@ class ImageGallery extends Component {
             hidden: true,
             page: prev.page + 1,
           }));
+          if (images.length < 12) {
+            this.setState((prev) => ({
+              hidden: false,
+              page: prev.page + 1,
+              loading: true,
+            }));
+          }
+          console.log(images.length);
         })
         .catch((error) => console.log(error))
         .finally(() => this.setState({ loading: false }));
@@ -40,14 +48,22 @@ class ImageGallery extends Component {
   onClickBtn = () => {
     this.setState({ loading: true });
     imgApi(this.props.searchQuery, this.state.page)
-      .then((images) =>
+      .then((images) => {
         this.setState((prev) => ({
           images: [...prev.images, ...images],
           hidden: true,
           page: prev.page + 1,
           loading: true,
-        }))
-      )
+        }));
+        if (images.length < 12) {
+          this.setState((prev) => ({
+            hidden: false,
+            page: prev.page + 1,
+            loading: true,
+          }));
+        }
+        console.log(images.length);
+      })
       .catch((error) => console.log(error))
       .finally(
         () => this.setState({ loading: false }),
@@ -60,7 +76,6 @@ class ImageGallery extends Component {
 
   render() {
     const { images, loading, hidden } = this.state;
-
     return (
       <div>
         {loading && <Loader />}
@@ -68,13 +83,11 @@ class ImageGallery extends Component {
         <ImageGalleryList>
           {images && <ImageGalleryItem images={images} />}
         </ImageGalleryList>
-        {images.length !== 0 &&
-          hidden &&
-          images.length / this.state.perPage === 1 && (
-            <Button type="button" onClick={this.onClickBtn}>
-              Load more
-            </Button>
-          )}
+        {images.length !== 0 && hidden && (
+          <Button type="button" onClick={this.onClickBtn}>
+            Load more
+          </Button>
+        )}
       </div>
     );
   }

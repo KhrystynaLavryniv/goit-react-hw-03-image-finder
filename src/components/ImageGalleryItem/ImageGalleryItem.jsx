@@ -23,7 +23,7 @@ class ImageGalleryItem extends Component {
         {this.props.images.map((image) => {
           const largePicture = () => this.toggleModal(image.largeImageURL);
           return (
-            <ImageGalleryCard key={image.id}>
+            <ImageGalleryCard key={image.webformatURL}>
               <ImageGalleryImg
                 src={image.webformatURL}
                 alt={image.tags}
