@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { Overlay, ModalWindow } from "./Modal.style";
 
 class Modal extends Component {
@@ -34,7 +33,3 @@ class Modal extends Component {
   }
 }
 export default Modal;
-
-Modal.propTypes = {
-  onClick: PropTypes.func.isRequired,
-};
