@@ -1,48 +1,23 @@
 import React from "react";
-import { Component } from "react";
 import PropTypes from "prop-types";
+import { ImageGalleryImg } from "./ImageGalleryItem.style";
 
-import Modal from "../Modal/Modal";
-import { ImageGalleryCard, ImageGalleryImg } from "./ImageGalleryItem.style";
+const ImageGalleryItem = (image) => (
+  <li
+    onClick={() => {
+      this.onClick(image.largeImageURL, image.tags);
+    }}
+  >
+    <ImageGalleryImg
+      src={image.webformatURL}
+      alt={image.tags}
+      onClick={this.onClick}
+    />
+  </li>
+);
 
-class ImageGalleryItem extends Component {
-  state = {
-    showModal: false,
-    largeImage: "",
-  };
-
-  toggleModal = (largeImageURL) => {
-    this.setState((prev) => ({
-      showModal: !prev.showModal,
-      largeImage: largeImageURL,
-    }));
-  };
-
-  render() {
-    return (
-      <>
-        {this.props.images.map((image) => {
-          const largePicture = () => this.toggleModal(image.largeImageURL);
-          return (
-            <ImageGalleryCard key={image.webformatURL}>
-              <ImageGalleryImg
-                src={image.webformatURL}
-                alt={image.tags}
-                onClick={largePicture}
-                id={image.largeImageURL}
-              />
-            </ImageGalleryCard>
-          );
-        })}
-        {this.state.showModal && (
-          <Modal onClose={this.toggleModal} image={this.state.largeImage} />
-        )}
-      </>
-    );
-  }
-}
 export default ImageGalleryItem;
 
 ImageGalleryItem.propTypes = {
-  images: PropTypes.array.isRequired,
+  image: PropTypes.string.isRequired,
 };
