@@ -94,7 +94,6 @@ class App extends Component {
     return (
       <>
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {loading && <Loader />}
 
         {images.length > 0 && (
           <ImageGallery images={images} onClick={this.toggleModal} />
